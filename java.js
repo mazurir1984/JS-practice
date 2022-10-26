@@ -225,6 +225,8 @@ const eBook1 = new EBook('Autor', 'Title', 2020, 'Ukraine','electro', 543);
                 console.log('fizz')
             } else if (i % 5 === 0) {
                 console.log('buzz');
+            } else {
+                console.log(i);
             }
         }
     };
