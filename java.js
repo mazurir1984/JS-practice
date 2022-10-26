@@ -31,7 +31,7 @@ console.log(sumElement(n));
 const student = {
     firstName: 'Fedor',
     lastName: 'Fedorovich',
-    gender: 'female',
+    isMale: false,
     contact: 80978377655,
     id: 'rt7638',
     dateOfApplication: new Date('2022-07-12'),
@@ -45,9 +45,16 @@ const studentGroup = {
 
 const studentInformation = {...student, ...studentGroup};
 
-for(const allStudentInformation in studentInformation) {
-    console.log(`${allStudentInformation}: ${studentInformation[allStudentInformation]}`);
+function getStudentData(student) {
+    let result = '';
+    for(const allStudentInformation in student) {
+        result += `${allStudentInformation}: ${studentInformation[allStudentInformation]}\n`;
+    }
+    return result;
 };
+
+alert(getStudentData(studentInformation))
+
 
 
 
@@ -57,25 +64,19 @@ for(const allStudentInformation in studentInformation) {
 3.4 Вывести индексы элементов, равных нулю ( если таковых нет то добавить 1-2 для проверки)
 3.5 Подсчитать количество отрицательных чисел в массиве*/
 
-const arr = [7, 9, 8, 44, 0, 32, 75, 0, -3, 88, 46, 76, 76, 23, 0, -8, 8647, 53, 54, 63, 71, -43, 64, 23, 7];
+const arr = new Array(25).fill(undefined).map((_, i) => (Math.random() > 0.5 ? i : -i));
 
 //3.2 Вывести элементы с четными индексами
-const evenIndex = arr.filter(function(element, index) {
-    if(index % 2 === 0 && index > 0) {
-        return true;
-    } 
-        return false;
-    });
+const evenIndex = arr.filter(function(_, index) {
+    return index % 2 === 0;
+});
 
 console.log(evenIndex);
 
 
 //3.3 Вывести только четные элементы (четные числа делятся на 2 без остатка)
 const evenNumbers = arr.filter(function(element) {
-    if(element % 2 === 0 && element > 0) {
-        return true;
-    }
-        return false;
+    return element % 2 === 0;
 });
 
 console.log(evenNumbers);
@@ -85,7 +86,7 @@ console.log(evenNumbers);
 const result = [];
 const element = 0;
 let indexElement = arr.indexOf(element);
-while (indexElement != -1) {
+while (indexElement !== -1) {
     result.push(indexElement);
     indexElement = arr.indexOf(element, indexElement + 1);
 };
@@ -210,30 +211,25 @@ class EBook extends Book {
 const eBook1 = new EBook('Autor', 'Title', 2020, 'Ukraine','electro', 543);
 
 
-/*5 Это задание не получается((
+/*5 
 Требуется написать функцию, выводящую в консоль числа от 1 до n, где n — это целое число, которая функция принимает в качестве параметра, с такими условиями:
 вывод fizzbuzz вместо чисел, кратных как 3, так и 5.
 вывод fizz вместо чисел, кратных 3;
 вывод buzz вместо чисел, кратных 5;*/
 
-/*function numberRange(n) {
-    let result = [];
-    if (Number.isInteger(n)) {
-        for (let i = 1; i <= n; i++) {
-            //if (i % 3 === 0 && i % 5 === 0) {
-            //    i = 'fizzbuzz'
-            //    result += i;
-            result += n[i];
-            
-            } 
-            
-        } 
-        console.log(result); 
-    }
+    function fizzbus(n) {
+        for(let i = 1; i <= n; i++) {
+            if(i % 3 === 0 && i % 5 === 0) {
+                console.log('fizzbus')
+            } else if (i % 3 === 0) {
+                console.log('fizz')
+            } else if (i % 5 === 0) {
+                console.log('buzz');
+            }
+        }
+    };
 
 
-    numberRange(10);*/
-    
     
     /*6
 С сервера передается обьект, имеющий следующую структуру:
@@ -298,11 +294,8 @@ data: {
 
 
 const {
-    data: {
-        data: dataArr  
-    }
+    data: { data: users }, 
 } = serverResponse;
-const users = `${dataArr}`;
 
-const [,,{}] = serverResponse.data.data;
-const arrayData = `${serverResponse.data.data}`;
+
+const [, , user3, user4] = users;
